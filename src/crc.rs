@@ -1,6 +1,6 @@
 //!CRC module
 
-use stm32l4x6::CRC as Inner;
+use stm32l4::stm32l4x5::CRC as Inner;
 use crate::rcc::AHB;
 
 use core::ptr;

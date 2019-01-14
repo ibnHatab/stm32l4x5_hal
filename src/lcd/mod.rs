@@ -29,7 +29,7 @@ pub enum ValidationResult {
 ///
 /// Implements destructor that turns off LCD.
 pub struct LCD {
-    inner: stm32l4x6::LCD,
+    inner: stm32l4::stm32l4x5::LCD,
 }
 
 #[inline]
@@ -174,7 +174,7 @@ impl LCD {
     /// 2. Reset RAM registers and set update request.
     /// 3. Performs configuration.
     /// 4. Turns on.
-    pub fn new(lcd: stm32l4x6::LCD, config: config::Config) -> Self {
+    pub fn new(lcd: stm32l4::stm32l4x5::LCD, config: config::Config) -> Self {
         let mut lcd = Self { inner: lcd };
 
         lcd.off();
@@ -197,7 +197,7 @@ impl LCD {
     /// Performs validation of settings.
     ///
     /// HSE clock is not supported yet...
-    pub fn validate(lcd: &mut stm32l4x6::LCD, bdcr: &mut BDCR, configuration: &config::Config) -> ValidationResult {
+    pub fn validate(lcd: &mut stm32l4::stm32l4x5::LCD, bdcr: &mut BDCR, configuration: &config::Config) -> ValidationResult {
         let clock_frequency: u32 = match bdcr.rtc_clock().freq(None) {
             Some(f) => f,
             None => return ValidationResult::ClockNotSet,
@@ -376,10 +376,10 @@ impl LCD {
         I::write(self, data)
     }
 
-    pub fn into_raw(mut self) -> stm32l4x6::LCD {
+    pub fn into_raw(mut self) -> stm32l4::stm32l4x5::LCD {
         // We cannot move out of value that implements Drop
         // so let's trick it and since underlying LCD doesn't implement Drop it is safe.
-        let mut result = unsafe { mem::uninitialized::<stm32l4x6::LCD>() };
+        let mut result = unsafe { mem::uninitialized::<stm32l4::stm32l4x5::LCD>() };
         mem::swap(&mut result, &mut self.inner);
         mem::forget(self);
 

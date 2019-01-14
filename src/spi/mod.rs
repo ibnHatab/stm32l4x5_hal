@@ -1,7 +1,7 @@
 //! Serial Peripheral Interface (SPI) module.
 
 use embedded_hal::spi::{FullDuplex, Mode, Phase, Polarity};
-use stm32l4x6::{SPI1, SPI2, SPI3};
+use stm32l4::stm32l4x5::{SPI1, SPI2, SPI3};
 
 use crate::time::Hertz;
 use crate::rcc::{APB1, APB2, Clocks};
@@ -132,16 +132,16 @@ pub trait InnerSpi where Self: Sized {
     fn get_clock_freq(clocks: &Clocks) -> Hertz;
 
     ///Retrieves CR1 register block.
-    fn cr1(&self) -> & ::stm32l4x6::spi1::CR1;
+    fn cr1(&self) -> & stm32l4::stm32l4x5::spi1::CR1;
 
     ///Retrieves CR2 register block.
-    fn cr2(&self) -> & ::stm32l4x6::spi1::CR2;
+    fn cr2(&self) -> & stm32l4::stm32l4x5::spi1::CR2;
 
     ///Retrieves SR register block.
-    fn sr(&self) -> & ::stm32l4x6::spi1::SR;
+    fn sr(&self) -> & stm32l4::stm32l4x5::spi1::SR;
 
     ///Retrieves DR register block.
-    fn dr(&self) -> & ::stm32l4x6::spi1::DR;
+    fn dr(&self) -> & stm32l4::stm32l4x5::spi1::DR;
 
     ///Configures CR1 register
     fn configure_cr1(&self, freq: Hertz, clocks: &Clocks, mode: Mode) {
@@ -197,19 +197,19 @@ impl InnerSpi for SPI1 {
         clocks.pclk2()
     }
 
-    fn cr1(&self) -> &::stm32l4x6::spi1::CR1 {
+    fn cr1(&self) -> &stm32l4::stm32l4x5::spi1::CR1 {
         &self.cr1
     }
 
-    fn cr2(&self) -> &::stm32l4x6::spi1::CR2 {
+    fn cr2(&self) -> &stm32l4::stm32l4x5::spi1::CR2 {
         &self.cr2
     }
 
-    fn sr(&self) -> &::stm32l4x6::spi1::SR {
+    fn sr(&self) -> &stm32l4::stm32l4x5::spi1::SR {
         &self.sr
     }
 
-    fn dr(&self) -> &::stm32l4x6::spi1::DR {
+    fn dr(&self) -> &stm32l4::stm32l4x5::spi1::DR {
         &self.dr
     }
 
@@ -230,19 +230,19 @@ impl InnerSpi for SPI2 {
         clocks.pclk1()
     }
 
-    fn cr1(&self) -> &::stm32l4x6::spi1::CR1 {
+    fn cr1(&self) -> &stm32l4::stm32l4x5::spi1::CR1 {
         &self.cr1
     }
 
-    fn cr2(&self) -> &::stm32l4x6::spi1::CR2 {
+    fn cr2(&self) -> &stm32l4::stm32l4x5::spi1::CR2 {
         &self.cr2
     }
 
-    fn sr(&self) -> &::stm32l4x6::spi1::SR {
+    fn sr(&self) -> &stm32l4::stm32l4x5::spi1::SR {
         &self.sr
     }
 
-    fn dr(&self) -> &::stm32l4x6::spi1::DR {
+    fn dr(&self) -> &stm32l4::stm32l4x5::spi1::DR {
         &self.dr
     }
 
@@ -263,25 +263,25 @@ impl InnerSpi for SPI3 {
         clocks.pclk1()
     }
 
-    fn cr1(&self) -> &::stm32l4x6::spi1::CR1 {
+    fn cr1(&self) -> &::stm32l4::stm32l4x5::spi1::CR1 {
         &self.cr1
     }
 
-    fn cr2(&self) -> &::stm32l4x6::spi1::CR2 {
+    fn cr2(&self) -> &::stm32l4::stm32l4x5::spi1::CR2 {
         &self.cr2
     }
 
-    fn sr(&self) -> &::stm32l4x6::spi1::SR {
+    fn sr(&self) -> &::stm32l4::stm32l4x5::spi1::SR {
         &self.sr
     }
 
-    fn dr(&self) -> &::stm32l4x6::spi1::DR {
+    fn dr(&self) -> &::stm32l4::stm32l4x5::spi1::DR {
         &self.dr
     }
 
     fn enable(apb: &mut Self::APB) {
         // enable and/or reset SPI
-        apb.enr1().modify(|_, w| w.sp3en().set_bit());
+        apb.enr1().modify(|_, w| w.spi3en().set_bit());
         apb.rstr1().modify(|_, w| w.spi3rst().set_bit());
         apb.rstr1().modify(|_, w| w.spi3rst().clear_bit());
     }

@@ -3,10 +3,10 @@
 //! To use these definitions, enable the "STM32L476VG" feature, and include like so:
 //!
 //! ```rust
-//! use stm32l4x6_hal::gpio::stm32l476vg::gpio;
+//! use stm32l4::stm32l4x5_hal::gpio::stm32l476vg::gpio;
 //! ```
 
-use stm32l4x6;
+use stm32l4::stm32l4x5;
 
 use super::*;
 

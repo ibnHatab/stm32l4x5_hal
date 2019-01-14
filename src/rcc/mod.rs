@@ -6,7 +6,7 @@
 
 #![deny(missing_docs, unused_results)]
 
-use stm32l4x6::{rcc, PWR, RCC};
+use stm32l4::stm32l4x5::{rcc, PWR, RCC};
 
 use crate::common::Constrain;
 use crate::flash::ACR;

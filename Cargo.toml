@@ -1,5 +1,5 @@
 [package]
-name = "stm32l4x6-hal"
+name = "stm32l4x5-hal"
 version = "0.1.0"
 authors = ["Douman <douman@gmx.se>"]
 keywords = ["arm", "cortex-m", "stm32", "hal", "embedded-hal"]
@@ -12,7 +12,11 @@ edition = "2018"
 [dependencies]
 cortex-m = "0.5"
 nb = "0.1"
-stm32l4x6 = "0.6"
+
+[dependencies.stm32l4]
+version = "0.6.0"
+features = ["stm32l4x5", "rt"]
+
 
 [dependencies.embedded-hal]
 features = ["unproven"]
@@ -26,11 +30,9 @@ version = "1"
 default-features = false
 version = "0.2"
 
-[features]
-rt = ["stm32l4x6/rt"]
-STM32L476VG = []
-STM32L496AG = []
+# [features]
+# rt = ["stm32l4x5/rt"]
+# STM32L475VG = []
 
-[package.metadata.docs.rs]
-#features = ["STM32L476VG", "STM32L496AG", "rt"]
-features = ["STM32L476VG", "rt"]
+# [package.metadata.docs.rs]
+# features = ["STM32L475VG", "rt"]

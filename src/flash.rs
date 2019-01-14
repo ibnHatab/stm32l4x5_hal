@@ -1,6 +1,6 @@
 //! Flash memory
 
-use stm32l4x6::{flash, FLASH};
+use stm32l4::stm32l4x5::{flash, FLASH};
 
 use crate::common::Constrain;
 

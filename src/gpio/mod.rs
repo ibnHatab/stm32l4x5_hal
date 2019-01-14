@@ -1,6 +1,6 @@
 //! General Purpose Input / Output
 //!
-//! This module provides common GPIO definitions that are available on all STM32L4x6 packages. By
+//! This module provides common GPIO definitions that are available on all Stm32l4x5 packages. By
 //! enabling features, you can use definitions for specific chips which may include additional
 //! GPIO lines. In that case, you will probably not want to `use` this module directly, but instead
 //! use it re-exported by the chip module.
@@ -170,30 +170,30 @@ impl AltFun for AF15 {
 macro_rules! impl_parts {
     ($($GPIOX:ident, $gpiox:ident;)+) => {
         $(
-            use stm32l4x6::$GPIOX;
+            use stm32l4::stm32l4x5::$GPIOX;
             impl AFRL<$GPIOX> {
-                pub(crate) fn afr(&mut self) -> &stm32l4x6::$gpiox::AFRL {
+                pub(crate) fn afr(&mut self) -> &stm32l4::stm32l4x5::$gpiox::AFRL {
                     unsafe { &(*$GPIOX::ptr()).afrl }
                 }
             }
             impl AFRH<$GPIOX> {
                 #[allow(dead_code)]
-                pub(crate) fn afr(&mut self) -> &stm32l4x6::$gpiox::AFRH {
+                pub(crate) fn afr(&mut self) -> &stm32l4::stm32l4x5::$gpiox::AFRH {
                     unsafe { &(*$GPIOX::ptr()).afrh }
                 }
             }
             impl MODER<$GPIOX> {
-                pub(crate) fn moder(&mut self) -> &stm32l4x6::$gpiox::MODER {
+                pub(crate) fn moder(&mut self) -> &stm32l4::stm32l4x5::$gpiox::MODER {
                     unsafe { &(*$GPIOX::ptr()).moder }
                 }
             }
             impl OTYPER<$GPIOX> {
-                pub(crate) fn otyper(&mut self) -> &stm32l4x6::$gpiox::OTYPER {
+                pub(crate) fn otyper(&mut self) -> &stm32l4::stm32l4x5::$gpiox::OTYPER {
                     unsafe { &(*$GPIOX::ptr()).otyper }
                 }
             }
             impl PUPDR<$GPIOX> {
-                pub(crate) fn pupdr(&mut self) -> &stm32l4x6::$gpiox::PUPDR {
+                pub(crate) fn pupdr(&mut self) -> &stm32l4::stm32l4x5::$gpiox::PUPDR {
                     unsafe { &(*$GPIOX::ptr()).pupdr }
                 }
             }
@@ -446,7 +446,7 @@ impl_parts!(
 // sixteen alternate function inputs (AF0 to AF15) that can be configured through the
 // GPIOx_AFRL (for pin 0 to 7) and GPIOx_AFRH (for pin 8 to 15) registers
 //
-// The GPIO ports (and pins) enumerated here are exposed on all package variants of the STM32L4x6.
+// The GPIO ports (and pins) enumerated here are exposed on all package variants of the Stm32l4x5.
 // Larger chips have more pins, and so have additional definitions in their respective modules.
 impl_gpio!(A, GPIOA, gpioaen, gpioarst,
            AFRL: [PA0, 0; PA1, 1; PA2, 2; PA3, 3; PA4, 4; PA5, 5; PA6, 6; PA7, 7;],
@@ -462,7 +462,4 @@ impl_gpio!(C, GPIOC, gpiocen, gpiocrst,
           );
 
 #[cfg(feature = "STM32L476VG")]
-pub mod stm32l476vg;
-
-#[cfg(feature = "STM32L496AG")]
-pub mod stm32l496ag;
+pub mod stm32l475vg;

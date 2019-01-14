@@ -11,23 +11,23 @@ use crate::time::Hertz;
 
 use cast::{u16, u32};
 
-use stm32l4x6::{
+use stm32l4::stm32l4x5::{
     // advanced timers
     TIM1,
     TIM15,
     TIM16,
-    TIM17, // stm32l4x6::rcc::apb2enr | apb2rstr
+    TIM17, // stm32l4x5::rcc::apb2enr | apb2rstr
     // General purpose
     TIM2,
     TIM3,
     TIM4,
-    TIM5, // stm32l4x6::rcc::apb1enr1 | apb1rstr1
+    TIM5, // stm32l4x5::rcc::apb1enr1 | apb1rstr1
     // Basic timers
     TIM6,
-    TIM7, /* stm32l4x6::rcc::apb1enr1 | apb1rstr1
+    TIM7, /* stm32l4x5::rcc::apb1enr1 | apb1rstr1
            * low-power timer
-           * LPTIM1 //stm32l4x6::rcc::apb1enr1 | apb1rstr1 */
-    TIM8, // stm32l4x6::rcc::apb2enr | apb2rstr:
+           * LPTIM1 //stm32l4x5::rcc::apb1enr1 | apb1rstr1 */
+    TIM8, // stm32l4x5::rcc::apb2enr | apb2rstr:
 };
 
 /// Possible timer events

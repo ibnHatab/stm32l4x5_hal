@@ -4,7 +4,7 @@ use core::ptr;
 use core::ops;
 
 use embedded_hal::serial;
-pub use stm32l4x6::{USART1, USART2, USART3};
+pub use stm32l4::stm32l4x5::{USART1, USART2, USART3};
 
 use crate::rcc::{APB1, APB2, Clocks};
 use crate::time::{Hertz};
@@ -165,40 +165,40 @@ pub trait RawSerial where Self: Sized {
     type APB;
 
     ///Access register block
-    fn registers(&self) -> &crate::stm32l4x6::usart1::RegisterBlock;
+    fn registers(&self) -> &stm32l4::stm32l4x5::usart1::RegisterBlock;
 
     ///Retrieves reference to ISR registers.
-    fn isr(&self) -> &crate::stm32l4x6::usart1::ISR {
+    fn isr(&self) -> &stm32l4::stm32l4x5::usart1::ISR {
         &self.registers().isr
     }
 
     ///Retrieves reference to RDR registers.
-    fn rdr(&self) -> &crate::stm32l4x6::usart1::RDR {
+    fn rdr(&self) -> &stm32l4::stm32l4x5::usart1::RDR {
         &self.registers().rdr
     }
 
     ///Retrieves reference to TDR registers.
-    fn tdr(&self) -> &crate::stm32l4x6::usart1::TDR {
+    fn tdr(&self) -> &stm32l4::stm32l4x5::usart1::TDR {
         &self.registers().tdr
     }
 
     ///Retrieves reference to CR1 registers
-    fn cr1(&self) -> &crate::stm32l4x6::usart1::CR1 {
+    fn cr1(&self) -> &stm32l4::stm32l4x5::usart1::CR1 {
         &self.registers().cr1
     }
 
     ///Retrieves reference to CR2 registers
-    fn cr2(&self) -> &crate::stm32l4x6::usart1::CR2 {
+    fn cr2(&self) -> &stm32l4::stm32l4x5::usart1::CR2 {
         &self.registers().cr2
     }
 
     ///Retrieves reference to CR2 registers
-    fn cr3(&self) -> &crate::stm32l4x6::usart1::CR3 {
+    fn cr3(&self) -> &stm32l4::stm32l4x5::usart1::CR3 {
         &self.registers().cr3
     }
 
     ///Retrieves reference to BRR registers
-    fn brr(&self) -> &crate::stm32l4x6::usart1::BRR {
+    fn brr(&self) -> &stm32l4::stm32l4x5::usart1::BRR {
         &self.registers().brr
     }
 
@@ -239,7 +239,7 @@ impl RawSerial for USART1 {
         clocks.pclk2()
     }
 
-    fn registers(&self) -> &crate::stm32l4x6::usart1::RegisterBlock {
+    fn registers(&self) -> &stm32l4::stm32l4x5::usart1::RegisterBlock {
         unsafe { &(*Self::ptr()) }
     }
 
@@ -264,7 +264,7 @@ impl RawSerial for USART2 {
         clocks.pclk1()
     }
 
-    fn registers(&self) -> &crate::stm32l4x6::usart1::RegisterBlock {
+    fn registers(&self) -> &stm32l4::stm32l4x5::usart1::RegisterBlock {
         unsafe { &(*Self::ptr()) }
     }
 
@@ -288,7 +288,7 @@ impl RawSerial for USART3 {
         clocks.pclk1()
     }
 
-    fn registers(&self) -> &crate::stm32l4x6::usart1::RegisterBlock {
+    fn registers(&self) -> &stm32l4::stm32l4x5::usart1::RegisterBlock {
         unsafe { &(*Self::ptr()) }
     }
 

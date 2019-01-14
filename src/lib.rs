@@ -18,7 +18,7 @@
 pub extern crate cortex_m;
 pub extern crate nb;
 pub extern crate embedded_hal;
-pub extern crate stm32l4x6;
+pub extern crate stm32l4;
 
 pub mod common;
 pub mod config;

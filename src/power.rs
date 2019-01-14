@@ -1,6 +1,6 @@
 //! Power control
 
-use stm32l4x6::{pwr, PWR};
+use stm32l4::stm32l4x5::{pwr, PWR};
 
 use crate::common::Constrain;
 
